@@ -1,10 +1,15 @@
 <template>
-  <div>Tdasdasdsahis is Product</div>
+  <div>
+    <CakeItem />
+  </div>
 </template>
 
 <script>
 export default {
   name: "ProductPage",
+  components :{
+    CakeItem :  () => import('@/components/CakeItem/CakeItem.vue')
+  }
 };
 </script>
 
