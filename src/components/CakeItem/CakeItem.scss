@@ -1,0 +1,94 @@
+.cake-item {
+    width: calc(20% - 10px);
+    box-shadow:
+        0 1px 2px 0 rgba(136, 136, 136, 0.1),
+        0 2px 6px 2px rgba(145, 145, 145, 0.15);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow:
+            0 1px 2px 0 rgba(30, 30, 30, 0.1),
+            0 2px 6px 6px rgba(35, 35, 35, 0.15);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .image {
+        width: 100%;
+        min-height: 250px;
+    }
+
+    .cake-item-info {
+        margin: 10px;
+
+        .cake-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            min-height: 60px;
+        }
+
+        .cake-item-description {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
+            font-size: 14px;
+            color: #767676;
+        }
+
+        .cake-item-price {
+            font-size: 16px;
+            font-weight: 600;
+            gap: 5px;
+
+            .cake-item-real-price {
+                text-decoration: line-through;
+                font-size: 14px;
+                color: #959595;
+            }
+        }
+
+        .add-cart-btn {
+            border:none;
+            outline : none;
+            padding : 5px 10px;
+            background-color: hsl(141, 53%, 53%);
+            color : white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            border-radius: 5px;
+            
+
+            &:hover { 
+                color : black;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .cake-item {
+        width: calc(25% - 10px);
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .cake-item {
+        width: calc(33% - 10px);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .cake-item {
+        width: calc(50% - 10px);
+
+        .image {
+            width: 100%;
+            min-height: 200px;
+        }
+    }
+}
