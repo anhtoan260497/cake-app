@@ -17,7 +17,7 @@
             {{ originalPrice }}$
           </p>
         </div>
-        <button class="add-cart-btn">Add</button>
+        <button class="add-cart-btn" @click="handleClickAddBtn">Add</button>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@
 
 <script>
 import { getImgUrl } from "@/helper/index";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "CakeItem",
   props: {
@@ -57,8 +58,45 @@ export default {
       default: 0,
     },
   },
+  computed: {
+    ...mapState(["cartItems"]),
+  },
   methods: {
+    ...mapActions([
+      "handleClickAddButton",
+      "setToastMessage",
+      "AddCartItem",
+      "updateCartItems",
+    ]),
     getImgUrl,
+    handleClickAddBtn() {
+      this.handleClickAddButton(true);
+      this.setToastMessage("Add To Cart");
+      if (this.cartItems.length === 0) {
+        this.AddCartItem({
+          name: this.name,
+          quantity: 1,
+          price: this.discountPrice || this.originalPrice,
+        });
+        return;
+      }
+      const idx = this.cartItems.findIndex((item) => item.name === this.name);
+      if (idx < 0) {
+        this.AddCartItem({
+          name: this.name,
+          quantity: 1,
+          price: this.discountPrice || this.originalPrice,
+        });
+        return;
+      }
+      const cloneCartItems = [...this.cartItems];
+      console.log;
+      cloneCartItems[idx].quantity += 1;
+      cloneCartItems[idx].price = this.discountPrice
+        ? this.discountPrice * cloneCartItems[idx].quantity
+        : this.originalPrice * cloneCartItems[idx].quantity;
+      this.updateCartItems(cloneCartItems);
+    },
   },
 };
 </script>
