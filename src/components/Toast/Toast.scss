@@ -1,7 +1,21 @@
 .toast-message {
     position: absolute;
-    right: 20px;
-    top : 20px;
+    top:-100px;
+    right : 0;
     width: 400px;
     z-index: 100;
+    transition: top 1s ease;
+    
+}
+
+.active-toast {
+    right: 20px;
+    top : 20px;
+    transition: top 1s ease;
+}
+
+@media only screen and(max-width : 768px) {
+    .active-toast {
+        right : 10px
+    }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Toast v-if="isClickAddBtn" :message="toastMessage" />
+    <Toast v-if="isClickAddBtn" :message="toastMessage" :type="toastType" />
     <Layout />
     <div class="body">
       <router-view></router-view>
@@ -17,7 +17,7 @@ export default {
     Toast: () => import("@/components/Toast/Toast.vue"),
   },
   computed: {
-    ...mapState(["isClickAddBtn", "toastMessage"]),
+    ...mapState(["isClickAddBtn", "toastMessage","toastType"]),
   },
   methods: {
     ...mapActions(["handleClickAddButton"]),
@@ -43,6 +43,7 @@ export default {
   .body {
     max-width: 1200px;
     margin: auto;
+    padding-top :80px;
   }
 }
 
