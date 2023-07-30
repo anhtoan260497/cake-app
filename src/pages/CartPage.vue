@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { getImgUrl, roundNumber2Decimals } from "@/helper";
 export default {
   name: "CartPage",
@@ -123,9 +123,11 @@ export default {
   methods: {
     getImgUrl,
     roundNumber2Decimals,
+    ...mapActions(['updateCartItems']),
     submitOrder() {
       console.log(this.cartItems);
       console.log(this.$router.push("/success"));
+      this.updateCartItems([]);
       // this.$route
     },
   },
