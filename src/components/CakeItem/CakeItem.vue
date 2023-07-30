@@ -67,7 +67,7 @@ export default {
       "setToastMessage",
       "AddCartItem",
       "updateCartItems",
-      "setToastType"
+      "setToastType",
     ]),
     getImgUrl,
     roundNumber2Decimals,
@@ -82,8 +82,10 @@ export default {
           img: this.img,
           discountPrice: this.discountPrice,
           originalPrice: this.originalPrice,
-          stock : this.stock
+          stock: this.stock,
         });
+        this.setToastMessage("Add To Cart");
+        this.setToastType("success");
         return;
       }
       const idx = this.cartItems.findIndex((item) => item.name === this.name);
@@ -95,18 +97,20 @@ export default {
           img: this.img,
           discountPrice: this.discountPrice,
           originalPrice: this.originalPrice,
-          stock : this.stock
+          stock: this.stock,
         });
+        this.setToastMessage("Add To Cart");
+        this.setToastType("success");
         return;
       }
       const cloneCartItems = [...this.cartItems];
-      if(cloneCartItems[idx].quantity + 1 > this.stock) {
-        this.setToastType('error')
+      if (cloneCartItems[idx].quantity + 1 > this.stock) {
+        this.setToastType("error");
         this.setToastMessage("Out of Stock, please choose another");
-        return
+        return;
       }
       this.setToastMessage("Add To Cart");
-      this.setToastType('success')
+      this.setToastType("success");
       cloneCartItems[idx].quantity += 1;
       cloneCartItems[idx].price = this.discountPrice
         ? this.discountPrice * cloneCartItems[idx].quantity
