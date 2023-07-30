@@ -2,14 +2,15 @@
   <div class="cake-list-container is-flex is-flex-wrap-wrap">
     <CakeItem
       v-for="item in cakeJSON"
-      :key="item.id"
+      :key="item.name"
       :name="item.name"
       :desc="item.description"
       :img="item.image_url"
       :is-on-discount="item.is_on_discount"
-      :stock="item.stock"
+      :stock="item.stock_count"
       :original-price="item.original_price"
-      :discount-price="item.discounted_price" />
+      :discount-price="item.discounted_price"
+      />
   </div>
 </template>
 

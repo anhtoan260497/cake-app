@@ -1,24 +1,37 @@
 <template>
-  <article class="toast-message message is-success">
+  <article
+    class="toast-message message"
+    :class="{'active-toast ': isClickAddBtn,'is-danger' : type !== 'success','is-success' : type === 'success' }">
     <div class="message-header">
       <p>Success</p>
       <button class="delete" aria-label="delete"></button>
     </div>
     <div class="message-body">
-    {{ message }}
+      {{ message }}
     </div>
   </article>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "ToastMessage",
-  props : {
-    message : {
-        type : String, 
-        default : ''
+  computed : {
+    ...mapState(["isClickAddBtn"])
+  },
+  props: {
+    message: {
+      type: String,
+      default: "",
+    },
+    type : {
+      type : String, 
+      default : 'success'
     }
-  }
+  },
+mounted (){
+  console.log(this.type)
+}
 };
 </script>
 

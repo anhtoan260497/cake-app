@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getImgUrl } from "@/helper/index";
+import { getImgUrl, roundNumber2Decimals } from "@/helper";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "CakeItem",
@@ -67,8 +67,10 @@ export default {
       "setToastMessage",
       "AddCartItem",
       "updateCartItems",
+      "setToastType"
     ]),
     getImgUrl,
+    roundNumber2Decimals,
     handleClickAddBtn() {
       this.handleClickAddButton(true);
       this.setToastMessage("Add To Cart");
@@ -77,6 +79,10 @@ export default {
           name: this.name,
           quantity: 1,
           price: this.discountPrice || this.originalPrice,
+          img: this.img,
+          discountPrice: this.discountPrice,
+          originalPrice: this.originalPrice,
+          stock : this.stock
         });
         return;
       }
@@ -86,11 +92,21 @@ export default {
           name: this.name,
           quantity: 1,
           price: this.discountPrice || this.originalPrice,
+          img: this.img,
+          discountPrice: this.discountPrice,
+          originalPrice: this.originalPrice,
+          stock : this.stock
         });
         return;
       }
       const cloneCartItems = [...this.cartItems];
-      console.log;
+      if(cloneCartItems[idx].quantity + 1 > this.stock) {
+        this.setToastType('error')
+        this.setToastMessage("Out of Stock, please choose another");
+        return
+      }
+      this.setToastMessage("Add To Cart");
+      this.setToastType('success')
       cloneCartItems[idx].quantity += 1;
       cloneCartItems[idx].price = this.discountPrice
         ? this.discountPrice * cloneCartItems[idx].quantity
